@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         body: Center(
           child: Text('AUST', style: TextStyle(
-            fontSize: 24, fontWeight: FontWeight.bold
+            fontSize: 29, fontWeight: FontWeight.bold
           ),),
         ),
       ),
