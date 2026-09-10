@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(
           child: Text('AUST', style: TextStyle(
@@ -18,6 +18,9 @@ class MyApp extends StatelessWidget {
           ),),
         ),
       ),
+      title: 'AUST PROJECT',
     );
   }
 }
+
+
