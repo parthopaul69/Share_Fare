@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(
-          child: Text('Helllo', style: TextStyle(
+          child: Text('AUST', style: TextStyle(
             fontSize: 29, fontWeight: FontWeight.bold
           ),),
         ),
