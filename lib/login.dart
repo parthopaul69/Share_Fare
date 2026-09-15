@@ -23,7 +23,7 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(height: 100),
             const TextField(
               decoration: InputDecoration(
-                labelText: "Email",
+                labelText: "EMAIL",
                 border: OutlineInputBorder(),
                 filled: true,
                 fillColor: Colors.white,
@@ -33,7 +33,7 @@ class LoginScreen extends StatelessWidget {
             const TextField(
               obscureText: true,
               decoration: InputDecoration(
-                labelText: "Password",
+                labelText: "PASSWORD",
                 border: OutlineInputBorder(),
                 filled: true,
                 fillColor: Colors.white,
@@ -42,12 +42,12 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(height: 20),
             SizedBox(
               width: double.infinity,
-              height: 48,
+              height: 50,
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
                 },
-                child: const Text("Login"),
+                child: const Text("LOGIN"),
               ),
             ),
           ],
