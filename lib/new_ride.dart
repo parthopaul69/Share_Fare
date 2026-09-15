@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'successful_post.dart';
 
 class NewRide extends StatelessWidget {
   const NewRide({super.key});
@@ -35,7 +36,7 @@ class NewRide extends StatelessWidget {
             SizedBox(height: 20),
             
             ElevatedButton(onPressed:() {
-              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SuccessfulPost()));
             }, child: Text('POST RIDE'))
           ],
         ),
