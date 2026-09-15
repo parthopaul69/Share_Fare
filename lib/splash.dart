@@ -17,7 +17,7 @@ class SplashScreen extends StatelessWidget {
       backgroundColor: Colors.black,
       body: Center(
         child: Image(
-          image: AssetImage('assets/ShareFareLogo.jpg'),
+          image: AssetImage('assets/SFLogo.png'),
           width: 200,
         ),
       ),

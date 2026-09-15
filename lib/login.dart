@@ -16,7 +16,7 @@ class LoginScreen extends StatelessWidget {
               "Welcome to ShareFare",
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 45,
+                fontSize: 25,
                 fontWeight: FontWeight.bold,
               ),
             ),
