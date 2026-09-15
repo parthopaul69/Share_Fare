@@ -12,6 +12,11 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Image(
+              image: AssetImage('assets/SFlogo.png'),
+              width: 200,
+            ),
+            const SizedBox(height: 50),
             const Text(
               "Welcome to ShareFare",
               style: TextStyle(
