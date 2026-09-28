@@ -36,46 +36,7 @@ class ActivityScreen extends StatelessWidget {
               ),
             )
           else
-            for (TripHistoryItem item in trips)
-              Card(
-                margin: EdgeInsets.only(bottom: 12),
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  side: BorderSide(color: Colors.black),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(14),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Icon(getVehicleIcon(item.vehicleName), size: 20, color: Colors.black),
-                              SizedBox(width: 8),
-                              Text(item.vehicleName, style: TextStyle(fontWeight: FontWeight.bold)),
-                              SizedBox(width: 6),
-                              Text(item.dateText, style: TextStyle(fontSize: 11)),
-                            ],
-                          ),
-                          Text('৳${item.fare.round()}', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Text('● ${item.origin}', style: TextStyle(fontSize: 13)),
-                      SizedBox(height: 4),
-                      Text('📍 ${item.destination}', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
-                      if (item.coTravelers.isNotEmpty) ...[
-                        SizedBox(height: 8),
-                        Text('Co-traveler: ${item.coTravelers}', style: TextStyle(fontSize: 12)),
-                      ],
-                    ],
-                  ),
-                ),
-              ),
+           
         ],
       ),
     );
