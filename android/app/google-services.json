@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "342829777413",
+    "project_id": "sharefare-b3948",
+    "storage_bucket": "sharefare-b3948.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:342829777413:android:ab288f314ce6cfc82c926c",
+        "android_client_info": {
+          "package_name": "AUST.PROJECT.share_fare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBawbgHjZs2XBtkcBx-mrzK0cip8drDrwA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
