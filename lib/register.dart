@@ -90,6 +90,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
 
+  Widget _genderBtn(String opt) {
+    bool sel = gender == opt;
+    return Expanded(
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: sel ? Colors.black : Colors.white,
+          foregroundColor: sel ? Colors.white : Colors.black,
+          side: BorderSide(color: Colors.black),
+          elevation: 0,
+        ),
+        onPressed: () {
+          setState(() {
+            gender = opt;
+          });
+        },
+        child: Text(opt, style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
