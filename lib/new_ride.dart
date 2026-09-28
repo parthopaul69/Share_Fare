@@ -272,10 +272,10 @@ class _NewRideState extends State<NewRide> {
                       icon: Icon(Icons.remove_circle_outline, color: Colors.black),
                       onPressed: finders > 1
                           ? () {
-                        setState(() {
-                          finders--;
-                        });
-                      }
+                              setState(() {
+                                finders--;
+                              });
+                            }
                           : null,
                     ),
                     Text(
@@ -286,10 +286,10 @@ class _NewRideState extends State<NewRide> {
                       icon: Icon(Icons.add_circle_outline, color: Colors.black),
                       onPressed: finders < maxFinders
                           ? () {
-                        setState(() {
-                          finders++;
-                        });
-                      }
+                              setState(() {
+                                finders++;
+                              });
+                            }
                           : null,
                     ),
                   ],
@@ -336,10 +336,10 @@ class _NewRideState extends State<NewRide> {
                 onPressed: posting ? null : _publish,
                 child: posting
                     ? SizedBox(
-                  width: 20,
-                  height: 20,
-                  child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
-                )
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+                      )
                     : Text('PUBLISH ROUTE POST'),
               ),
             ),
@@ -413,13 +413,13 @@ class _PlacePickerState extends State<_PlacePicker> {
                   prefixIcon: Icon(Icons.search, size: 20, color: Colors.black),
                   suffixIcon: search.isNotEmpty
                       ? IconButton(
-                    icon: Icon(Icons.close, size: 18, color: Colors.black),
-                    onPressed: () {
-                      setState(() {
-                        search = '';
-                      });
-                    },
-                  )
+                          icon: Icon(Icons.close, size: 18, color: Colors.black),
+                          onPressed: () {
+                            setState(() {
+                              search = '';
+                            });
+                          },
+                        )
                       : null,
                   contentPadding: EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                   focusedBorder: OutlineInputBorder(
@@ -471,48 +471,48 @@ class _PlacePickerState extends State<_PlacePicker> {
             Expanded(
               child: filtered.isEmpty
                   ? Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.search_off, size: 36, color: Colors.black),
-                    SizedBox(height: 8),
-                    Text('No Dhaka location found', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-                    SizedBox(height: 4),
-                    Text('Tap custom location above to use "$search"', style: TextStyle(fontSize: 12)),
-                  ],
-                ),
-              )
-                  : ListView.builder(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                itemCount: filtered.length,
-                itemBuilder: (BuildContext context, int index) {
-                  String place = filtered[index];
-                  return Container(
-                    margin: EdgeInsets.only(bottom: 8),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(8),
-                      onTap: () => Navigator.pop(context, place),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-                        child: Row(
-                          children: [
-                            Icon(Icons.place_outlined, size: 20, color: Colors.black),
-                            SizedBox(width: 12),
-                            Expanded(
-                              child: Text(place, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-                            ),
-                            Icon(Icons.chevron_right, size: 18, color: Colors.black),
-                          ],
-                        ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.search_off, size: 36, color: Colors.black),
+                          SizedBox(height: 8),
+                          Text('No Dhaka location found', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                          SizedBox(height: 4),
+                          Text('Tap custom location above to use "$search"', style: TextStyle(fontSize: 12)),
+                        ],
                       ),
+                    )
+                  : ListView.builder(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      itemCount: filtered.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        String place = filtered[index];
+                        return Container(
+                          margin: EdgeInsets.only(bottom: 8),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(8),
+                            onTap: () => Navigator.pop(context, place),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.place_outlined, size: 20, color: Colors.black),
+                                  SizedBox(width: 12),
+                                  Expanded(
+                                    child: Text(place, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                                  ),
+                                  Icon(Icons.chevron_right, size: 18, color: Colors.black),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                     ),
-                  );
-                },
-              ),
             ),
           ],
         ),
@@ -521,3 +521,64 @@ class _PlacePickerState extends State<_PlacePicker> {
   }
 }
 
+class _SuccessScreen extends StatelessWidget {
+  final RideOffer offer;
+  const _SuccessScreen({required this.offer});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 24),
+              Icon(Icons.check_circle, size: 52, color: Colors.green),
+              SizedBox(height: 14),
+              Text('Route Posted!', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              SizedBox(height: 4),
+              Text('${offer.origin} → ${offer.destination}', style: TextStyle(fontSize: 14)),
+              SizedBox(height: 20),
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Your Rider PIN', style: TextStyle(fontWeight: FontWeight.bold)),
+                    SizedBox(height: 6),
+                    Text(offer.riderPin, style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, letterSpacing: 8)),
+                    SizedBox(height: 2),
+                    Text('Finders will enter this PIN to verify you. Keep it safe.', style: TextStyle(fontSize: 11)),
+                  ],
+                ),
+              ),
+              Spacer(),
+              SizedBox(
+                width: double.infinity,
+                height: 46,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.black, foregroundColor: Colors.white),
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => Home()),
+                      (Route<dynamic> route) => false,
+                    );
+                  },
+                  child: Text('BACK TO HOME'),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
