@@ -135,3 +135,34 @@ class _NewRideState extends State<NewRide> {
     });
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => _SuccessScreen(offer: offer)));
   }
+
+  Widget _placeTile(String label, String value, String hint, VoidCallback onTap) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label, style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+        SizedBox(height: 6),
+        InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(8),
+          child: Container(
+            width: double.infinity,
+            padding: EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.black),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              value.isEmpty ? hint : value,
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.black,
+                fontWeight: value.isEmpty ? FontWeight.normal : FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
