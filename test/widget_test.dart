@@ -5,17 +5,24 @@ import 'package:share_fare/home.dart';
 import 'package:share_fare/login.dart';
 import 'package:share_fare/main.dart';
 import 'package:share_fare/new_ride.dart';
+import 'package:share_fare/register.dart';
 import 'package:share_fare/ride_details.dart';
 import 'package:share_fare/splash.dart';
 import 'package:share_fare/successful_post.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 void main() {
+  setUp(() {
+    SharedPreferences.setMockInitialValues({});
+  });
+
   testWidgets('MyApp renders SplashScreen and navigates to LoginScreen', (WidgetTester tester) async {
     await tester.pumpWidget(const MyApp());
     expect(find.byType(SplashScreen), findsOneWidget);
     expect(find.byType(Image), findsOneWidget);
 
-    await tester.pump(const Duration(seconds: 4));
+    await tester.pump(const Duration(seconds: 3));
     await tester.pumpAndSettle();
 
     expect(find.byType(LoginScreen), findsOneWidget);
@@ -23,13 +30,38 @@ void main() {
   });
 
   testWidgets('LoginScreen renders email, password, and navigates to Home', (WidgetTester tester) async {
+    SharedPreferences.setMockInitialValues({
+      'email': 'test@sharefare.com',
+      'password': 'password123',
+    });
     await tester.pumpWidget(const MaterialApp(home: LoginScreen()));
 
     expect(find.text('Welcome to ShareFare'), findsOneWidget);
     expect(find.byType(TextField), findsNWidgets(2));
     expect(find.text('LOGIN'), findsOneWidget);
 
+    await tester.enterText(find.byType(TextField).at(0), 'test@sharefare.com');
+    await tester.enterText(find.byType(TextField).at(1), 'password123');
+
     await tester.tap(find.text('LOGIN'));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(Home), findsOneWidget);
+    expect(find.text('ShareFare'), findsOneWidget);
+  });
+
+  testWidgets('RegisterScreen registers new user and navigates to Home', (WidgetTester tester) async {
+    await tester.pumpWidget(const MaterialApp(home: RegisterScreen()));
+
+    expect(find.text('Create an Account'), findsOneWidget);
+    expect(find.byType(TextField), findsNWidgets(3));
+    expect(find.text('REGISTER'), findsOneWidget);
+
+    await tester.enterText(find.byType(TextField).at(0), 'newuser@sharefare.com');
+    await tester.enterText(find.byType(TextField).at(1), 'password123');
+    await tester.enterText(find.byType(TextField).at(2), 'password123');
+
+    await tester.tap(find.text('REGISTER'));
     await tester.pumpAndSettle();
 
     expect(find.byType(Home), findsOneWidget);

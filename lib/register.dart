@@ -1,34 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'home.dart';
-import 'register.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
   bool _isLoading = false;
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 
-  Future<void> _login() async {
+  Future<void> _register() async {
     final email = _emailController.text.trim();
     final password = _passwordController.text.trim();
+    final confirmPassword = _confirmPasswordController.text.trim();
 
-    if (email.isEmpty || password.isEmpty) {
+    if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Please enter both email and password")),
+        const SnackBar(content: Text("Please fill all fields")),
+      );
+      return;
+    }
+
+    if (password != confirmPassword) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Passwords do not match")),
+      );
+      return;
+    }
+
+    if (password.length < 6) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Password must be at least 6 characters")),
       );
       return;
     }
@@ -37,28 +53,23 @@ class _LoginScreenState extends State<LoginScreen> {
 
     try {
       final prefs = await SharedPreferences.getInstance();
-      final savedEmail = prefs.getString('email');
-      final savedPassword = prefs.getString('password');
+      await prefs.setString('email', email);
+      await prefs.setString('password', password);
+      await prefs.setBool('isLoggedIn', true);
 
-      if (email == savedEmail && password == savedPassword) {
-        await prefs.setBool('isLoggedIn', true);
-        if (mounted) {
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => const Home()),
-            (route) => false,
-          );
-        }
-      } else {
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text("Incorrect email or password."),
-              backgroundColor: Colors.redAccent,
-              duration: Duration(seconds: 3),
-            ),
-          );
-        }
+      // Move to Home screen
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Account registered successfully!"),
+            backgroundColor: Colors.green,
+          ),
+        );
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const Home()),
+          (route) => false,
+        );
       }
     } catch (e) {
       if (mounted) {
@@ -88,18 +99,18 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               const Image(
                 image: AssetImage('assets/SFlogo.png'),
-                width: 200,
+                width: 150,
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 30),
               const Text(
-                "Welcome to ShareFare",
+                "Create an Account",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 40),
               TextField(
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
@@ -125,33 +136,41 @@ class _LoginScreenState extends State<LoginScreen> {
                   fillColor: Colors.white,
                 ),
               ),
+              const SizedBox(height: 15),
+              TextField(
+                controller: _confirmPasswordController,
+                obscureText: true,
+                style: const TextStyle(color: Colors.black),
+                decoration: const InputDecoration(
+                  labelText: "CONFIRM PASSWORD",
+                  labelStyle: TextStyle(color: Colors.black54),
+                  border: OutlineInputBorder(),
+                  filled: true,
+                  fillColor: Colors.white,
+                ),
+              ),
               const SizedBox(height: 20),
               SizedBox(
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: _isLoading ? null : _login,
+                  onPressed: _isLoading ? null : _register,
                   child: _isLoading
                       ? const SizedBox(
                           height: 20,
                           width: 20,
                           child: CircularProgressIndicator(strokeWidth: 2),
                         )
-                      : const Text("LOGIN"),
+                      : const Text("REGISTER"),
                 ),
               ),
               const SizedBox(height: 15),
               TextButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const RegisterScreen(),
-                    ),
-                  );
+                  Navigator.pop(context);
                 },
                 child: const Text(
-                  "Don't have an account? Register",
+                  "Already have an account? Login",
                   style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
               ),
