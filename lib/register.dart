@@ -89,7 +89,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
   }
 
-
   Widget _genderBtn(String opt) {
     bool sel = gender == opt;
     return Expanded(

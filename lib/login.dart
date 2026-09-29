@@ -127,10 +127,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: loading ? null : _login,
                 child: loading
                     ? SizedBox(
-                  width: 20,
-                  height: 20,
-                  child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
-                )
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+                      )
                     : Text('SIGN IN'),
               ),
             ),

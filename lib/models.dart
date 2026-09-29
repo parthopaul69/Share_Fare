@@ -172,7 +172,6 @@ class TripHistoryItem {
   });
 }
 
-
 const List<String> kDhakaPlaces = [
   'Adabor',
   'Agargaon',
