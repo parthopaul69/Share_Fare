@@ -13,7 +13,6 @@ analyzer:
   errors:
     unused_import: ignore
     unnecessary_import: ignore
-    use_build_context_synchronously: ignore
   exclude:
     - build/**
     - android/**
@@ -41,6 +40,8 @@ linter:
     prefer_final_locals: false
     prefer_final_in_for_each: false
     prefer_final_fields: false
+    use_key_in_widget_constructors: false
+    prefer_const_constructors_in_immutables: false
 
 formatter:
   page_width: 120

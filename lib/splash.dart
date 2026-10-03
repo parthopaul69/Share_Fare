@@ -1,24 +1,56 @@
 import 'package:flutter/material.dart';
-import 'login.dart';
 
-class SplashScreen extends StatelessWidget {
+import 'auth_service.dart';
+import 'login.dart';
+import 'home.dart';
+
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const LoginScreen()),
-      );
-    });
+  State<SplashScreen> createState() => _SplashScreenState();
+}
 
-    return const Scaffold(
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _start();
+  }
+
+  void _start() async {
+    await Future.delayed(Duration(milliseconds: 1800));
+    if (!mounted) return;
+    await AuthService().init();
+    if (!mounted) return;
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => AuthService().isAuthenticated ? Home() : LoginScreen()),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
       backgroundColor: Colors.black,
       body: Center(
-        child: Image(
-          image: AssetImage('assets/SFlogo.png'),
-          width: 200,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/SFlogo.png',
+              width: 90,
+              height: 90,
+              errorBuilder: (context, error, stackTrace) => Icon(Icons.directions_car, size: 56, color: Colors.white),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'ShareFare',
+              style: TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 8),
+            Text('Smart Road Rides & Shared Fares', style: TextStyle(color: Colors.white, fontSize: 14)),
+          ],
         ),
       ),
     );
